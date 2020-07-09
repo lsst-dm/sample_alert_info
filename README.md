@@ -62,8 +62,7 @@ Community broker authors will be interested in simulating the Kafka alert stream
 
 Sample alerts are provided from a subset of the DECam High Cadence Transient Search (HiTS; [Förster et al. 2016](https://ui.adsabs.harvard.edu/abs/2016ApJ...832..155F/abstract)).
 
-We process g-band data from three fields (`Blind15A_26`, `Blind15A_40`, and `Blind15A_42`) from the 2015 campaign and use coadded templates built from the matching fields in the 2014 campaign.  
-In total there are 5020 processed CCD-visits.
+We process g-band data from three fields (`Blind15A_26`, `Blind15A_40`, and `Blind15A_42`) from the 2015 campaign and use coadded templates built from the matching fields in the 2014 campaign. In total there are 5020 processed CCD-visits.
 
 Users interested in performing their own reductions can obtain these data [here](https://github.com/lsst/ap_verify_hits2015).
 The `ap_verify` package in the LSST Stack can be used to [process this dataset](https://pipelines.lsst.io/modules/lsst.ap.verify/running.html).
@@ -108,7 +107,7 @@ Attribution of known Solar System objects is not yet implemented, so while obser
 ### `DIAForcedSource` Records
 
 For some DIAObjects, the centroid is inaccurate due to image subtraction failures (e.g., for bright stars). 
-For these source the forced PSF fluxes will be highly biased.
+For these sources the forced PSF fluxes will be highly biased.
 
 ### Upper Limits
 
