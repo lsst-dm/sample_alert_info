@@ -40,6 +40,18 @@ Note that in operations, users will query the PPDB using [ADQL](http://www.ivoa.
 
 Users should install [lsst.alert.packet](https://github.com/lsst/alert_packet) to parse alerts and optionally [alert-stream-simulator](https://github.com/lsst-dm/alert-stream-simulator/) and [alert-stream](https://github.com/lsst-dm/alert_stream) if they wish to simulate a Kafka alert stream.
 
+The code block below will loop through the packets and print their `diaSourceId`s:
+
+```
+import lsst.alert.packet as ap
+schema = ap.Schema.from_file()
+
+with open('latest_single_ccd_sample.avro','rb') as f:
+    writer_schema, packet_iter = schema.retrieve_alerts(f)
+    for packet in packet_iter:
+        print(packet['diaSource']['diaSourceId'])
+```
+
 ## External References and Additional Resources
 
 The [Data Products Definition Document (DPDD)](http://ls.st/dpdd) provides a change-controlled guide to what scientific contents are planned for alerts and other Rubin Observatory data products.
