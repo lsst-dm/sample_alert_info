@@ -79,7 +79,7 @@ We process g-band data from three fields (`Blind15A_26`, `Blind15A_40`, and `Bli
 Users interested in performing their own reductions can obtain these data [here](https://github.com/lsst/ap_verify_hits2015).
 The `ap_verify` package in the LSST Stack can be used to [process this dataset](https://pipelines.lsst.io/modules/lsst.ap.verify/running.html).
 
-## Limitations and Caveats (2020-07-06)
+## Limitations and Caveats (2020-07-15)
 
 The Alert Production pipelines are not yet complete, so not all of the alert contents prescribed by the DPDD are populated in these sample alerts.
 Missing fields and quantities that failed to fit or process will have `null` entries.
@@ -136,7 +136,7 @@ We expect to propose such a representation and include it in future releases of 
 `CCDData` also does not currently support `xy0`, which would allow cutouts to have the same pixel coordinates as they do in the full CCD exposure.
 
 Some detections on bleed trails or other artifacts generate extremely large footprints and correspondingly large cutouts.
-We expect to mitigate this problem in the future.
+We have limited cutout size to twice the detection footprint and manually excluded extremely large cutouts (>4 MB) for the time being; further work is ongoing.
 
 ## Feedback
 
