@@ -23,7 +23,7 @@ We anticipate providing reprocessed and updated alert samples as pipeline develo
 Alerts are provided as Snappy-compressed [Avro](https://avro.apache.org/) files.
 The schema used to store the alerts is included in the file.
 
-As the complete sample is about 1 TB, we include two smaller subsets—alerts from a single CCD-visit, and all of the alerts from all CCDs in a single visit.
+As the complete sample is about 50 GB, we include two smaller subsets—alerts from a single CCD-visit, and all of the alerts from all CCDs in a single visit.
 
 ### Database
 
