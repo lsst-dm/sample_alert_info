@@ -106,7 +106,7 @@ As of 2020-11-15, the only non-null columns are:
 * `midPointTai`
 * `filterName`	
 
-In some cases the reported `DIASource` magnitude will be below the notional single-epoch limiting magnitude, as the reported magnitudes are taken from the ground-truth catalog but the simulation allows for statistical fluctuations.
+In some cases the reported `DIASource` magnitude will be below the nominal single-epoch limiting magnitude, as the reported magnitudes are taken from the ground-truth catalog but the simulation allows for statistical fluctuations.
 
 ## Limitations and Caveats (2020-07-15)
 
