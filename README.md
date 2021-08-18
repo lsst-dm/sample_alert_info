@@ -38,19 +38,23 @@ Note that in operations, users will query the PPDB using [ADQL](http://www.ivoa.
 
 ### Software
 
-Users should install [lsst.alert.packet](https://github.com/lsst/alert_packet) to parse alerts and optionally [alert-stream-simulator](https://github.com/lsst-dm/alert-stream-simulator/) and [alert-stream](https://github.com/lsst-dm/alert_stream) if they wish to simulate a Kafka alert stream.
+Libraries for parsing Avro files are widely available.
+In Python, the [fastavro](https://github.com/fastavro/fastavro/) package is a good choice.	
 
 The code block below will loop through the packets and print their `diaSourceId`s:
 
 ```
-import lsst.alert.packet as ap
-schema = ap.Schema.from_file()
+import fastavro
 
 with open('latest_single_ccd_sample.avro','rb') as f:
-    writer_schema, packet_iter = schema.retrieve_alerts(f)
-    for packet in packet_iter:
+    freader = fastavro.reader(f)
+    schema = freader.schema
+
+    for packet in freader:
         print(packet['diaSource']['diaSourceId'])
 ```
+
+Optionally, the packages [alert-stream-simulator](https://github.com/lsst-dm/alert-stream-simulator/) and [alert-stream](https://github.com/lsst-dm/alert_stream) enable simulating a Kafka alert stream.
 
 ## External References and Additional Resources
 
