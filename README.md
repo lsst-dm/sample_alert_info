@@ -59,7 +59,7 @@ Optionally, the packages [alert-stream-simulator](https://github.com/lsst-dm/ale
 ## Obtaining the data with Kafka
 
 The sample alerts are also provided over Kafka at an integration testing endpoint.
-For more details on this system, see [Kafka Integration Endpoint](./doc/kafka_integration_endpoint.md) and the [Connection Examples](./examples/kafka_integration_endpoint).
+For more details on this system, see [Alert Stream Integration Endpoint](./doc/alert_stream_integration_endpoint.md) and the [Connection Examples](./examples/alert_stream_integration_endpoint).
 
 ## External References and Additional Resources
 

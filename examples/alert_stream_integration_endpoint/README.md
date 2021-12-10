@@ -1,4 +1,4 @@
-# Kafka Integration Endpoint Examples #
+# Alert Stream Integration Endpoint Examples #
 
 This directory has a bunch of code examples showing how you can connect to the alert stream's integration endpoint.
 There are a lot of ways to connect to Kafka, both in Python and more generally.

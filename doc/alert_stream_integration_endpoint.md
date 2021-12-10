@@ -1,4 +1,4 @@
-# Kafka Integration Endpoint #
+# Alert Stream Integration Endpoint #
 
 The Rubin Alert Stream is provided over Kafka to community brokers.
 In order to facilitate development of community broker systems, and in order to find bugs in the alert stream implementation, you can connect to an "integration" implementation of the alert stream.
@@ -7,13 +7,13 @@ The integration environment has a topic named `alerts-simulated` which repeatedl
 
 ## Getting connected ##
 
-The quickest way to connect is probably to follow an [example](../../examples/kafka_integration_endpoint).
+The quickest way to connect is probably to follow an [example](../../examples/alert_stream_integration_endpoint).
 
 If you already have a Kafka consumer system and just want the short version, here's what you need to know:
 
 ### Kafka Cluster
 
-The Kafka cluster's bootstrap URL is `alert-stream-int.lsst.cloud:9094`.
+The Kafka cluster's bootstrap URL is **alert-stream-int.lsst.cloud:9094**.
 
 TLS (aka SSL) and SCRAM-SHA-512 are required to connect; the broker is using LetsEncrypt as the CA for its certificates.
 
@@ -21,7 +21,7 @@ In other words, the broker is using `security.protocol=SASL_SSL` and `sasl.mecha
 
 ### Schema Registry
 
-The Schema Registry is available at `https://alert-scheams-int.lsst.cloud`.
+The Schema Registry is available at **https://alert-scheams-int.lsst.cloud**.
 
 All GET requests are permitted without authentication, while all non-GET requests will be denied.
 
