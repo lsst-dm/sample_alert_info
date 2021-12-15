@@ -7,7 +7,7 @@ The integration environment has a topic named `alerts-simulated` which repeatedl
 
 ## Getting connected ##
 
-The quickest way to connect is probably to follow an [example](../../examples/alert_stream_integration_endpoint).
+The quickest way to connect is probably to follow an [example](../examples/alert_stream_integration_endpoint).
 
 If you already have a Kafka consumer system and just want the short version, here's what you need to know:
 
