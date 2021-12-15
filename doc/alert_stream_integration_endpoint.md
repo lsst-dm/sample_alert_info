@@ -21,7 +21,7 @@ In other words, the broker is using `security.protocol=SASL_SSL` and `sasl.mecha
 
 ### Schema Registry
 
-The Schema Registry is available at **https://alert-scheams-int.lsst.cloud**.
+The Schema Registry is available at **https://alert-schemas-int.lsst.cloud**.
 
 All GET requests are permitted without authentication, while all non-GET requests will be denied.
 
@@ -30,11 +30,11 @@ All GET requests are permitted without authentication, while all non-GET request
 The only topic that is accessible is `alerts-simulated`.
 This is the topic that receives a complete visit of sample alert data every 37 seconds.
 
-Community brokers have `Read` and `DescribeConfigs` permissions for this topic; see [the Kafka documentation](https://kafka.apache.org/documentation/#operations_resources_and_protocols) for a precises explanation of what this covers.
+Community brokers have `Read` and `DescribeConfigs` permissions for this topic; see [the Kafka documentation](https://kafka.apache.org/documentation/#operations_resources_and_protocols) for a precise explanation of what this covers.
 
 ### Consumer Groups
 
-Community brokers are granted global permissions of consumer groups that are prefixed with their username.
+Community brokers are granted global permissions on consumer groups that are prefixed with their username.
 
 For example, the `alerce-int` community broker can create, update, and delete groups named `alerce-int-testing`, or `alerce-int-somelongsuffix`, or `alerce-int_whateveryoulike`, or anything else starting with `alerce-int`.
 
