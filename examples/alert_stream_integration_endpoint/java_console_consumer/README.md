@@ -16,7 +16,7 @@ sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule require
 ```
 
 Of course, fill in the username and password values yourself.
-It's important that you keep the quotation marks, and the backslash (\), and the semicolon - just change the strings inside the quotes.
+It's important that you keep the quotation marks, and the backslashes (`\`), and the semicolon - just change the strings inside the quotes.
 
 Then, from within that same directory, you can run the following docker command.
 It will mount the `consumer.properties` file into `/app/consumer.properties` inside the Docker container so that the console consumer script can use it.
