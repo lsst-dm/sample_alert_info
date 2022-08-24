@@ -5,7 +5,7 @@ These alerts are intended to provide candidate community alert brokers as well a
 
 ## Obtaining the Data as a file
 
-Sample alert data may be obtained at [this link](https://lsst.ncsa.illinois.edu/~ebellm/sample_precursor_alerts/).
+Sample alert data may be obtained at [this link](https://epyc.astro.washington.edu/~ecbellm/sample_precursor_alerts/).
 We anticipate providing reprocessed and updated alert samples as pipeline development progresses, so the data are arranged in a directory structure:
 
 ```
