@@ -14,7 +14,7 @@ Next, you should be able to run the script.
 You need to set two environment variables to get this to work, and then you can call it directly with 'python':
 
 ```sh
-export KAFKA_USERNAME=rubin-communitybroker-int  # use your actual value!
+export KAFKA_USERNAME=rubin-communitybroker-idfint  # use your actual value!
 export KAFKA_PASSWORD=<.....>  # here, too!
 python confluent_kafka_consumer.py
 ```
