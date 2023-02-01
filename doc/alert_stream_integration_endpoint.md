@@ -89,11 +89,11 @@ The choice of 8 partitions is something that may change, particularly if communi
 The complete installation of Rubin's alert system is open source, so you can browse it if you like.
 It is defined in a set of Helm charts and operators, and runs on Kubernetes on Google's Cloud:
 
- - [`alert-stream-broker`](https://github.com/lsst-sqre/charts/tree/master/charts/alert-stream-broker) defines the core broker resources.
+ - [`alert-stream-broker`](https://github.com/lsst-sqre/phalanx/tree/master/services/alert-stream-broker/charts/alert-stream-broker) defines the core broker resources.
    It relies upon [Strimzi](https://strimzi.io/) to handle most of the details; configuration is done through the Kafka, KafkaTopic, and KafkaUser resources.
- - `strimzi-registry-operator` ([chart](https://github.com/lsst-sqre/charts/tree/master/charts/strimzi-registry-operator), [operator](https://github.com/lsst-sqre/strimzi-registry-operator)) is used to configure the Schema Registry application and connect it to the Kafka Broker.
- - [`alert-stream-schema-registry`](https://github.com/lsst-sqre/charts/tree/master/charts/alert-stream-schema-registry) defines the Schema Registry instance which gets created by the strimzi-registry-operator.
+ - `strimzi-registry-operator` ([chart](https://github.com/lsst-sqre/charts/tree/main/charts/strimzi-registry-operator), [operator](https://github.com/lsst-sqre/strimzi-registry-operator)) is used to configure the Schema Registry application and connect it to the Kafka Broker.
+ - [`alert-stream-schema-registry`](https://github.com/lsst-sqre/phalanx/tree/master/services/alert-stream-broker/charts/alert-stream-schema-registry) defines the Schema Registry instance which gets created by the strimzi-registry-operator.
    It also configures the ingress which gates access to only permit HTTP GET.
- - [`alert-stream-simulator`](https://github.com/lsst-sqre/charts/tree/master/charts/alert-stream-simulator) sets up the subsystem which injects alerts into the `alerts-simulated` topic.
+ - [`alert-stream-simulator`](https://github.com/lsst-sqre/phalanx/tree/master/services/alert-stream-broker/charts/alert-stream-simulator) sets up the subsystem which injects alerts into the `alerts-simulated` topic.
 
 These charts are reified with concrete values [in Phalanx](https://github.com/lsst-sqre/phalanx/blob/master/services/alert-stream-broker/values-idfint.yaml), which is a configuration system used by Rubin.
