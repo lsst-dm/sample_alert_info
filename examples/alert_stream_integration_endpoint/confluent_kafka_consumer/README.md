@@ -11,11 +11,15 @@ pip install 'confluent_kafka[schemaregistry,avro]'
 ```
 
 Next, you should be able to run the script.
-You need to set two environment variables to get this to work, and then you can call it directly with 'python':
+You need to set two environment variables to get this to work, and then you can call it directly with 'python'.
+This example assumes you have your password and username stored in 1password and you are using 1passwordCL, however if you need to enter
+it in manually, replace everything after the = sign with your actual values. If you don't know how to user 1passwordCL,
+go to https://1password.com/downloads/command-line/ and follow the tutorial:
 
 ```sh
-export KAFKA_USERNAME=rubin-communitybroker-idfint  # use your actual value!
-export KAFKA_PASSWORD=<.....>  # here, too!
+export KAFKA_USER=$(op item get "alert-stream idfint communitybroker-idfint" --fields label=username) # use your actual label for your password/username!
+export KAFKA_PASSWORD=$(op item get "alert-stream idfint communitybroker-idfint" --fields label=password)# here too!
+
 python confluent_kafka_consumer.py
 ```
 
