@@ -15,9 +15,9 @@ USERNAME = os.environ.get("KAFKA_USERNAME")
 PASSWORD = os.environ.get("KAFKA_PASSWORD")
 
 # These are the URLs for the integration environment of the alert stream on the
-# US data facility (aka the "USDF" environment).
-SERVER = "usdf-alert-stream-dev.lsst.cloud:9094"
-SCHEMA_REG_URL = "https://usdf-alert-schemas-dev.slac.stanford.edu"
+# interim data facility (aka the "IDF INT" environment).
+SERVER = "alert-stream-int.lsst.cloud:9094"
+SCHEMA_REG_URL = "https://alert-schemas-int.lsst.cloud"
 
 
 def main():
@@ -59,7 +59,7 @@ def main():
         # These next two properties tell the Kafka client about the specific
         # authentication and authorization protocols that should be used when
         # connecting.
-        "security.protocol": "SASL_PLAINTEXT",
+        "security.protocol": "SASL_SSL",
         "sasl.mechanisms": "SCRAM-SHA-512",
         # The sasl.username and sasl.password are passed through over
         # SCRAM-SHA-512 auth to connect to the cluster. The username is not
@@ -72,7 +72,7 @@ def main():
         # Finally, we pass in the deserializer that we created above,
         # configuring the consumer so that it automatically does all the Schema
         # Registry and Avro deserialization work.
-        "value.deserializer": deserializer
+        "value.deserializer": deserializer,
     }
     # We create a DeserializingConsumer, which is a specialized confluent_kafka
     # consumer class which communicates with the SchemaRegistry and
@@ -92,7 +92,7 @@ def main():
     #
     # This subscribe call makes sure the consumer is querying all 8 of the
     # partitions in the alerts-simulated topic.
-    consumer.subscribe(["alert-simulated"])
+    consumer.subscribe(["alerts-simulated"])
 
     # In an infinite loop, check for new messages in the stream, and print out
     # a few of their fields.
@@ -106,7 +106,7 @@ def main():
             # print a message so the user knows that we're working and it
             # doesn't look like the process has stalled.
             print("waiting for messages...")
-            time.sleep(3)
+            time.sleep(1)
         else:
             # The message is a low-level wrapper. Full docs are available here:
             #
@@ -120,10 +120,10 @@ def main():
             # in the Avro schema for alert packets, which is fully laid out in
             # the github.com/lsst/alert_packet repository.
             alert_id = deserialized["alertId"]
-            timestamp = deserialized["diaSource"]["midpointMjdTai"]
+            timestamp = deserialized["diaSource"]["midPointTai"]
             ra = deserialized["diaSource"]["ra"]
-            decl = deserialized["diaSource"]["dec"]
-            alert_timestamp = msg.timestamp()
+            decl = deserialized["diaSource"]["decl"]
+            print(alert_id, timestamp, ra, decl)
 
 
 if __name__ == "__main__":
