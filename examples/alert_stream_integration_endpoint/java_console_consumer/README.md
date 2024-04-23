@@ -7,7 +7,7 @@ The Java consumer relies upon a configuration file which holds the username and 
 Make a file called 'consumer.properties' and fill it with this:
 
 ```
-security.protocol=SASL_SSL
+security.protocol=SASL_PLAINTEXT
 sasl.mechanism=SCRAM-SHA-512
 
 sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required \
@@ -29,8 +29,8 @@ docker run -it --rm -v $PWD:/config confluentinc/cp-schema-registry \
       --topic alerts-simulated \
       --group $KAFKA_USERNAME-example-javaconsole \
       --consumer.config /config/consumer.properties \
-      --property schema.registry.url=https://alert-schemas-int.lsst.cloud \
-      --bootstrap-server=alert-stream-int.lsst.cloud:9094 \
+      --property schema.registry.url=https://usdf-alert-schemas-dev.slac.stanford.edu \
+      --bootstrap-server=usdf-alert-stream-dev.lsst.cloud:9094 \
       --timeout-ms=60000
 ```
 
@@ -47,7 +47,7 @@ docker run -it --rm -v $PWD:/config confluentinc/cp-schema-registry \
       --topic alerts-simulated \
       --group $KAFKA_USERNAME-example-javaconsole \
       --consumer.config /config/consumer.properties \
-      --property schema.registry.url=https://alert-schemas-int.lsst.cloud \
-      --bootstrap-server=alert-stream-int.lsst.cloud:9094 \
+      --property schema.registry.url=https://usdf-alert-schemas-dev.slac.stanford.edu\
+      --bootstrap-server=usdf-alert-stream-dev.lsst.cloud:9094 \
       --timeout-ms=60000 | jq '.alertId' -r
 ```
