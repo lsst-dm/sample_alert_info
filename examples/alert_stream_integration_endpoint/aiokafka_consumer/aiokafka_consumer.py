@@ -1,4 +1,3 @@
-import json
 import asyncio
 import os
 import sys
@@ -7,7 +6,6 @@ from schema_registry.client import SchemaRegistryClient
 from schema_registry.serializers import AvroMessageSerializer
 
 from aiokafka import AIOKafkaConsumer
-from aiokafka.helpers import create_ssl_context
 
 
 # Load input parameters from environment variables:
@@ -18,10 +16,9 @@ USERNAME = os.environ.get("KAFKA_USERNAME")
 PASSWORD = os.environ.get("KAFKA_PASSWORD")
 
 # These are the URLs for the integration environment of the alert stream on the
-# interim data facility (aka the "IDF INT" environment).
-SERVER = "alert-stream-int.lsst.cloud:9094"
-SCHEMA_REG_URL = "https://alert-schemas-int.lsst.cloud"
-
+# US data facility (aka the "USDF" environment).
+SERVER = "usdf-alert-stream-dev.lsst.cloud:9094"
+SCHEMA_REG_URL = "https://usdf-alert-schemas-dev.slac.stanford.edu"
 
 async def main():
     # Validate the input parameters, exiting if we're missing them.
@@ -62,7 +59,8 @@ async def main():
         # These next two properties tell the Kafka client about the specific
         # authentication and authorization protocols that should be used when
         # connecting.
-        security_protocol="SASL_SSL",
+        ssl_context=None,
+        security_protocol="SASL_PLAINTEXT",
         sasl_mechanism="SCRAM-SHA-512",
         # The sasl.username and sasl.password are passed through over
         # SCRAM-SHA-512 auth to connect to the cluster. The username is not
@@ -70,16 +68,10 @@ async def main():
         # should never be committed to source code.
         sasl_plain_username=USERNAME,
         sasl_plain_password=PASSWORD,
-        # The Kafka broker is using SSL to encrypt the connection. When this is
-        # the case, aiokafka requires that you provide a "SSL Context" which
-        # bundles together SSL certificate data. It uses this context to verify
-        # that the broker is trustworthy.
-        #
         # The Rubin broker uses a certificate provided by LetsEncrypt, a
         # commonly known "certificate authority". This will be trusted by
         # default, typically, so we can create a SSL context without any
         # special configuration.
-        ssl_context=create_ssl_context(),
         # Finally, we pass in the deserializer that we created above,
         # configuring the consumer so that it automatically does all the Schema
         # Registry and Avro deserialization work.
@@ -99,7 +91,7 @@ async def main():
         # Retrieving a batch with getmany is much more efficient than
         # retrieving them one at a time with the consumer.getone method, but
         # both would work.
-        data = await consumer.getmany(timeout_ms=1000)
+        data = await consumer.getmany(timeout_ms=10000)
 
         # We can get an empty data object if the timeout elapses. If this is
         # the case, just print a message so the user knows that we're working
@@ -120,9 +112,9 @@ async def main():
                 # fields in the Avro schema for alert packets, which is fully
                 # laid out in the github.com/lsst/alert_packet repository.
                 alert_id = deserialized["alertId"]
-                timestamp = deserialized["diaSource"]["midPointTai"]
+                timestamp = deserialized["diaSource"]["midpointMjdTai"]
                 ra = deserialized["diaSource"]["ra"]
-                decl = deserialized["diaSource"]["decl"]
+                decl = deserialized["diaSource"]["dec"]
                 print(alert_id, timestamp, ra, decl)
 
     # We won't ever reach this in this code, since the while loop runs forever.
